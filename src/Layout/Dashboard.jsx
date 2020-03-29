@@ -40,6 +40,19 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
+  menuTitle: {
+    padding: '11px 20px',
+    textAlign: 'right',
+    margin: 0,
+    fontSize: '30px',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: theme.palette.primary.main,
+    display: 'flex'
+  },
+  menuLogo: {
+    marginRight: '10px'
+  },
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
@@ -153,6 +166,10 @@ export default function Dashboard() {
         }}
         open={open}
       >
+        <div className={classes.menuTitle}>
+          <img className={classes.menuLogo} src="/logo.svg" alt="Robokit" width={40} />
+          <span>Robokit</span>
+        </div>
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />

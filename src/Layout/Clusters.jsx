@@ -8,10 +8,13 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    cursor: 'pointer'
   },
   paper: {
     marginRight: theme.spacing(2),
@@ -46,27 +49,38 @@ export const Clusters = () => {
   return (
     <>
       <Button
+        className={classes.root}
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <Typography component="h1" variant="h6" color="inherit" align="left" noWrap>
+        <Typography component="span" color="inherit">
           Scalecube
         </Typography>
+        {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </Button>
-      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-        {({ TransitionProps, placement }) => (
+      <Popper
+        placement="bottom-start"
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+        modifiers={{
+          offset: { offset: '80 20' }
+        }}
+      >
+        {({ TransitionProps }) => (
           <Grow
             {...TransitionProps}
-            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+            style={{ transformOrigin: 'bottom-start' }}
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleClose}>CapsulaJS</MenuItem>
+                  <MenuItem onClick={handleClose}>OM2</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
